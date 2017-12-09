@@ -2,7 +2,10 @@ package guyue.hu;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 import java.util.*;
+
+import javax.imageio.ImageIO;
 
 public class Tank {
 	public static final int TANK_SIZE = 30;
@@ -22,6 +25,34 @@ public class Tank {
 	private int oldX, oldY;
 	private int life = 100;
 	private BloodBar blood = new BloodBar();
+	private static Image[] tankImgs;
+	private static Map<String, Image> imgs = new HashMap<String, Image>();
+	
+	static {
+		try {
+			tankImgs = new Image[] {
+					ImageIO.read(Tank.class.getClassLoader().getResource("images/tankU.gif")),
+					ImageIO.read(Tank.class.getClassLoader().getResource("images/tankD.gif")),
+					ImageIO.read(Tank.class.getClassLoader().getResource("images/tankL.gif")),
+					ImageIO.read(Tank.class.getClassLoader().getResource("images/tankR.gif")),
+					ImageIO.read(Tank.class.getClassLoader().getResource("images/tankLU.gif")),
+					ImageIO.read(Tank.class.getClassLoader().getResource("images/tankRU.gif")),
+					ImageIO.read(Tank.class.getClassLoader().getResource("images/tankLD.gif")),
+					ImageIO.read(Tank.class.getClassLoader().getResource("images/tankRD.gif")),
+			};
+			imgs.put("U", tankImgs[0]);
+			imgs.put("D", tankImgs[1]);
+			imgs.put("L", tankImgs[2]);
+			imgs.put("R", tankImgs[3]);
+			imgs.put("LU", tankImgs[4]);
+			imgs.put("RU", tankImgs[5]);
+			imgs.put("LD", tankImgs[6]);
+			imgs.put("RD", tankImgs[7]);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	public int getLife() {
 		return life;
@@ -83,13 +114,6 @@ public class Tank {
 	public void draw(Graphics g) {
 		if(this.isLive()) {
 			Color defaultColor = g.getColor();
-			if(good) {
-				g.setColor(Color.ORANGE);
-			} else {
-				g.setColor(Color.BLUE);
-			}
-			g.fillOval(tankLocationX, tankLocationY, TANK_SIZE, TANK_SIZE);
-			g.setColor(defaultColor);
 			this.drawPT(g);
 			if(good) {
 				blood.draw(g);
@@ -231,7 +255,7 @@ public class Tank {
 				direction = directions[i];
 			}
 			if(random.nextInt(12) > 8) {
-//				this.fire();
+				this.fire();
 			}
 			step --;
 		}
@@ -242,28 +266,28 @@ public class Tank {
 	public void drawPT(Graphics g) {
 		switch(ptDirection) {
 		case U :
-			g.drawLine(tankLocationX+TANK_SIZE/2, tankLocationY+TANK_SIZE/2, tankLocationX+TANK_SIZE/2, tankLocationY);
+			g.drawImage(imgs.get("U"),tankLocationX, tankLocationY, null);
 			break;
 		case D :
-			g.drawLine(tankLocationX+TANK_SIZE/2, tankLocationY+TANK_SIZE/2, tankLocationX+TANK_SIZE/2, tankLocationY+TANK_SIZE);
+			g.drawImage(imgs.get("D"),tankLocationX, tankLocationY, null);
 			break;
 		case L :
-			g.drawLine(tankLocationX+TANK_SIZE/2, tankLocationY+TANK_SIZE/2, tankLocationX, tankLocationY+TANK_SIZE/2);
+			g.drawImage(imgs.get("L"),tankLocationX, tankLocationY, null);
 			break;
 		case R :
-			g.drawLine(tankLocationX+TANK_SIZE/2, tankLocationY+TANK_SIZE/2, tankLocationX+TANK_SIZE, tankLocationY+TANK_SIZE/2);
+			g.drawImage(imgs.get("R"),tankLocationX, tankLocationY, null);
 			break;
 		case LU :
-			g.drawLine(tankLocationX+TANK_SIZE/2, tankLocationY+TANK_SIZE/2, tankLocationX, tankLocationY);
+			g.drawImage(imgs.get("LU"),tankLocationX, tankLocationY, null);
 			break;
 		case RU :
-			g.drawLine(tankLocationX+TANK_SIZE/2, tankLocationY+TANK_SIZE/2, tankLocationX+TANK_SIZE, tankLocationY);
+			g.drawImage(imgs.get("RU"),tankLocationX, tankLocationY, null);
 			break;
 		case LD :
-			g.drawLine(tankLocationX+TANK_SIZE/2, tankLocationY+TANK_SIZE/2, tankLocationX, tankLocationY+TANK_SIZE);
+			g.drawImage(imgs.get("LD"),tankLocationX, tankLocationY, null);
 			break;
 		case RD :
-			g.drawLine(tankLocationX+TANK_SIZE/2, tankLocationY+TANK_SIZE/2, tankLocationX+TANK_SIZE, tankLocationY+TANK_SIZE);
+			g.drawImage(imgs.get("RD"),tankLocationX, tankLocationY, null);
 			break;
 		}
 	}
