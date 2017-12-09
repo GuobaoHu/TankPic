@@ -231,7 +231,7 @@ public class Tank {
 				direction = directions[i];
 			}
 			if(random.nextInt(12) > 8) {
-				this.fire();
+//				this.fire();
 			}
 			step --;
 		}

@@ -1,12 +1,17 @@
 package guyue.hu;
 
 import java.awt.*;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 public class Boom {
 	private int x, y;
 	private TankClient tc;
 	private boolean live = true;
-	private int diameters[] = {6, 15, 20, 30, 40, 50, 60, 25, 10, 2};
+//	private static Toolkit tk = Toolkit.getDefaultToolkit();
+	
+	private static Image[] imgs = new Image[11];
+	
 	private int step = 0;
 	
 	public Boom(int x, int y, TankClient tc) {
@@ -15,18 +20,28 @@ public class Boom {
 		this.tc = tc;
 	}
 	
+	//通过ImageIO对Image赋值，不会产生首次爆炸画不出图片的情况,即ImageIO会直接将硬盘上的图片数据一次性读到内存中
+	//写在静态语句块中，是为了一次性给静态imgs数组赋值，减少读硬盘的次数，增加硬盘的使用寿命
+	static {
+		try {
+		for (int i = 0; i < imgs.length; i++) {
+			imgs[i] = ImageIO.read(Boom.class.getClassLoader().getResource("images/" + i + ".gif"));
+		}
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	//画出爆炸过程
 	public void draw(Graphics g) {
 		if(!live) {
 			tc.getBooms().remove(this);
 			return;
 		}
-		Color c = g.getColor();
-		g.setColor(Color.RED);
-		g.fillOval(x, y, diameters[step], diameters[step]);
-		g.setColor(c);
+		g.drawImage(imgs[step], x, y, null);
 		step ++;
-		if(step == diameters.length) {
+		if(step == imgs.length) {
 			live = false;
 			step = 0;
 		}
