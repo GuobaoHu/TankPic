@@ -1,7 +1,12 @@
 package guyue.hu;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+
+import java.util.*;
 
 public class Bullet {
 	public static final int SIZE = 10;
@@ -12,6 +17,33 @@ public class Bullet {
 	private TankClient tc;
 	private boolean good = true;
 	private static int kill = 0;
+	private static Image[] bulletImgs;
+	private static Map<String, Image> imgs = new HashMap<String, Image>();
+	
+	static {
+		try {
+			bulletImgs = new Image[] {
+					ImageIO.read(Bullet.class.getClassLoader().getResource("images/missileU.gif")),
+					ImageIO.read(Bullet.class.getClassLoader().getResource("images/missileD.gif")),
+					ImageIO.read(Bullet.class.getClassLoader().getResource("images/missileL.gif")),
+					ImageIO.read(Bullet.class.getClassLoader().getResource("images/missileR.gif")),
+					ImageIO.read(Bullet.class.getClassLoader().getResource("images/missileLU.gif")),
+					ImageIO.read(Bullet.class.getClassLoader().getResource("images/missileRU.gif")),
+					ImageIO.read(Bullet.class.getClassLoader().getResource("images/missileLD.gif")),
+					ImageIO.read(Bullet.class.getClassLoader().getResource("images/missileRD.gif"))
+			};
+			imgs.put("U", bulletImgs[0]);
+			imgs.put("D", bulletImgs[1]);
+			imgs.put("L", bulletImgs[2]);
+			imgs.put("R", bulletImgs[3]);
+			imgs.put("LU", bulletImgs[4]);
+			imgs.put("RU", bulletImgs[5]);
+			imgs.put("LD", bulletImgs[6]);
+			imgs.put("RD", bulletImgs[7]);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public static int getKill() {
 		return kill;
@@ -30,44 +62,45 @@ public class Bullet {
 	}
 
 	public void draw(Graphics g) {
-		Color c = g.getColor();
-		if(good) {
-		g.setColor(Color.RED);
-		} else {
-			g.setColor(Color.BLACK);
-		}
-		g.fillOval(locationX, locationY, SIZE, SIZE);
-		g.setColor(c);
-		this.move();
+		
+		this.move(g);
 	}
 	
-	public void move() {
+	public void move(Graphics g) {
 		switch(direction) {
 		case U :
+			g.drawImage(imgs.get("U"), locationX, locationY, null);
 			locationY -= Y_STEP;
 			break;
 		case D :
+			g.drawImage(imgs.get("D"), locationX, locationY, null);
 			locationY += Y_STEP;
 			break;
 		case L :
+			g.drawImage(imgs.get("L"), locationX, locationY, null);
 			locationX -= X_STEP;
 			break;
 		case R :
+			g.drawImage(imgs.get("R"), locationX, locationY, null);
 			locationX += X_STEP;
 			break;
 		case LU :
+			g.drawImage(imgs.get("LU"), locationX, locationY, null);
 			locationX -= X_STEP;
 			locationY -= Y_STEP;
 			break;
 		case RU :
+			g.drawImage(imgs.get("RU"), locationX, locationY, null);
 			locationX += X_STEP;
 			locationY -= Y_STEP;
 			break;
 		case LD :
+			g.drawImage(imgs.get("LD"), locationX, locationY, null);
 			locationX -= X_STEP;
 			locationY += Y_STEP;
 			break;
 		case RD :
+			g.drawImage(imgs.get("RD"), locationX, locationY, null);
 			locationX += X_STEP;
 			locationY += Y_STEP;
 			break;

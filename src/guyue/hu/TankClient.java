@@ -54,6 +54,7 @@ public class TankClient extends Frame {
 			}
 		});
 		this.addKeyListener(new KeyMonitor());
+		this.setBackground(Color.LIGHT_GRAY);
 		new Thread(new TankMove()).start();
 		this.addEnemy();
 		this.setVisible(true);
@@ -116,7 +117,7 @@ public class TankClient extends Frame {
 		Graphics offScreenG = offScreenImage.getGraphics();
 		Color c = offScreenG.getColor();
 		//3.每次都初始化背景
-		offScreenG.setColor(Color.WHITE);
+		offScreenG.setColor(Color.LIGHT_GRAY);
 		offScreenG.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 		//4.重置画布画笔的颜色
 		offScreenG.setColor(c);
