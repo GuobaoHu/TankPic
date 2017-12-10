@@ -17,6 +17,11 @@ public class PropMgr {
 	private PropMgr() {
 	}
 	
+	/**
+	 * @param key 配置文件的key
+	 * @return 返回配置文件中对应的value值，模式是"key=value",等号左右两边不要有空格
+	 * 
+	 */
 	public static String getProp(String key) {
 		return prop.getProperty(key);
 	}

@@ -8,8 +8,8 @@ import java.util.List;
 
 /**
  * @author guyue
- * @date 2017年11月29日 下午9:21:28
- * @class describ:
+ *  2017年11月29日 下午9:21:28
+ *  describ:
  */
 public class TankClient extends Frame {
 	public static final int GAME_WIDTH = 800;

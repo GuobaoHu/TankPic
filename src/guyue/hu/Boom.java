@@ -4,6 +4,10 @@ import java.awt.*;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
+/**
+ * @author hgb22613
+ *
+ */
 public class Boom {
 	private int x, y;
 	private TankClient tc;
@@ -14,6 +18,11 @@ public class Boom {
 	
 	private int step = 0;
 	
+	/**
+	 * @param x,x坐标
+	 * @param y，y坐标
+	 * @param tc，持有TankClient的引用
+	 */
 	public Boom(int x, int y, TankClient tc) {
 		this.x = x;
 		this.y = y;

@@ -4,8 +4,8 @@ import java.awt.*;
 
 /**
  * @author guyue
- * @date 2017年12月7日 下午8:31:05
- * @class describ:
+ *  2017年12月7日 下午8:31:05
+ *  describ:
  */
 public class Food {
 	private int x, y, w, h;
