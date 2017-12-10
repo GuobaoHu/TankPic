@@ -9,7 +9,6 @@ import javax.imageio.ImageIO;
 import java.util.*;
 
 public class Bullet {
-	public static final int SIZE = 10;
 	public static final int X_STEP = 10;
 	public static final int Y_STEP = 10;
 	private int locationX, locationY;
@@ -44,6 +43,7 @@ public class Bullet {
 			e.printStackTrace();
 		}
 	}
+	public static final int SIZE = bulletImgs[0].getWidth(null);
 	
 	public static int getKill() {
 		return kill;

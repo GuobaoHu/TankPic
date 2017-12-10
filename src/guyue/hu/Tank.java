@@ -8,7 +8,6 @@ import java.util.*;
 import javax.imageio.ImageIO;
 
 public class Tank {
-	public static final int TANK_SIZE = 30;
 	public static final int X_STEP = 5;
 	public static final int Y_STEP = 5;
 	
@@ -52,7 +51,7 @@ public class Tank {
 			e.printStackTrace();
 		}
 	}
-	
+	public static final int TANK_SIZE = tankImgs[0].getWidth(null);
 	
 	public int getLife() {
 		return life;
