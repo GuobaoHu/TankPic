@@ -30,7 +30,6 @@ public class Boom {
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	//»­³ö±¬Õ¨¹ý³Ì

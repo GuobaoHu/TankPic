@@ -253,7 +253,7 @@ public class Tank {
 				int i = random.nextInt(directions.length);
 				direction = directions[i];
 			}
-			if(random.nextInt(12) > 8) {
+			if(random.nextInt(12) > 10) {
 				this.fire();
 			}
 			step --;

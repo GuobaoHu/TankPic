@@ -156,8 +156,8 @@ public class Bullet {
 				return true;
 			}
 		}
-		if(tanks.size() < 6) {
-			tc.addEnemy();
+		if(tanks.size() == 0) {
+			tc.reAddEnemy();
 		}
 		return false;
 	}

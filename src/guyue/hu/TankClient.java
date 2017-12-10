@@ -2,6 +2,7 @@ package guyue.hu;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
@@ -62,7 +63,23 @@ public class TankClient extends Frame {
 
 	//添加敌方Tank,添加在界面的随机位置
 	public void addEnemy() {
-		for(int i=0; i<10; i++) {
+		int count;
+		count = Integer.parseInt(PropMgr.getProp("enemyCount"));
+		for(int i=0; i<count; i++) {
+			Tank t = new Tank(random.nextInt(GAME_WIDTH - Tank.TANK_SIZE), 
+					30 + random.nextInt(GAME_HEIGHT - Tank.TANK_SIZE - 30), false, this);
+			while(t.getRect().intersects(w1.getRect()) || t.getRect().intersects(w2.getRect())) {
+				t = new Tank(random.nextInt(GAME_WIDTH - Tank.TANK_SIZE), 
+						30 + random.nextInt(GAME_HEIGHT - Tank.TANK_SIZE - 30), false, this);
+			}
+			enemyTanks.add(t);
+		}
+	}
+	
+	public void reAddEnemy() {
+		int count;
+		count = Integer.parseInt(PropMgr.getProp("reAddCount"));
+		for(int i=0; i<count; i++) {
 			Tank t = new Tank(random.nextInt(GAME_WIDTH - Tank.TANK_SIZE), 
 					30 + random.nextInt(GAME_HEIGHT - Tank.TANK_SIZE - 30), false, this);
 			while(t.getRect().intersects(w1.getRect()) || t.getRect().intersects(w2.getRect())) {
