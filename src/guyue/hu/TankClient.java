@@ -76,6 +76,9 @@ public class TankClient extends Frame {
 		}
 	}
 	
+	/**
+	 * 重新添加坦克
+	 */
 	public void reAddEnemy() {
 		int count;
 		count = Integer.parseInt(PropMgr.getProp("reAddCount"));
