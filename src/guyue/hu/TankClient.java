@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.List;
 
 /**
+ * 是坦克游戏的主窗口
  * @author guyue
  *  2017年11月29日 下午9:21:28
  *  describ:
